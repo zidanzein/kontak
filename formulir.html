@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+   
+</head>
+<body>
+    <div align="center">
+    <div class="border" align="center">
+    <form action="proses.php" onsubmit="return validasiForm()">
+    <input type="hidden" name="id" id="id"> <label for=""></label>
+    <table>
+    <h1>FORMULIR PENDAFTARAN</h1>
+    <h2>LOMBA VOLLY</h2>
+    <h3>ANTAR RT RW</h3>
+
+    <tr>
+        <td>Nama Tim</td>
+        <td>:</td>
+        <td></td>
+        <td><input type="text" name="name" id="namatim" required></td>
+    </tr>
+
+    <tr>
+    <td>Jumlah Anggota</td>
+    <td>:</td>
+    <td></td>
+    <td><input type="number" name="juml" id="jumlah" required></td>
+    </tr>
+
+    <tr>
+    <td>Asal</td>
+    <td>:</td>
+    <td>RT </td>
+    <td><input type="number" name="RT" id="rt" required></td>
+    </tr>
+
+    <tr>
+    <td></td>
+    <td></td>
+    <td>RW</td>
+    <td><input type="number" name="RW" id="rw" required></td>
+    </tr>
+
+    <tr>
+    <td>Nama Ketua Tim</td>
+    <td>:</td>
+    <td></td>
+    <td><input type="text" name="nameket" id="namaket" required></td>
+    </tr>
+
+    <tr>
+    <td>No Hp Ketua Tim</td>
+    <td>:</td>
+    <td></td>
+    <td><input type="number" name="nomor" id="nohp" required></td>
+    </tr>
+
+    <tr>
+    <td>Upload Foto</td>
+    <td>:</td>
+    <td></td>
+    <td><input type="file" name="pict" id="foto" required></td>
+    </tr>
+
+    <tr>
+    <td>Tanggal Pendaftaran</td>
+    <td>:</td>
+    <td></td>
+    <td><input type="date" name="tangpen" id="tangpend" required></td>
+    </tr>
+
+    <tr>
+    <td>Jenis Tim</td>
+    <td>:</td>
+    <td></td>
+    <td><input type="radio" name="jenis" value="Putra" id="jenis" checked>Putra
+    <input type="radio" name="jenis" value="Putri" id="jenis" checked>Putri</td>
+    </tr>
+    </table>
+    <td><button class="btn btn-sm btn-primary" type="button" onclick="save()">save</button>
+    <button class="btn btn-sm btn-primary" type="button" onclick="clearData()">Reset</button></td>
+    </div>
+    </div>
+    <div class="col-lg-18">
+        <div class="card">
+            <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Tim</th>
+                            <th>Jumlah Anggota</th>
+                            <th>RT</th>
+                            <th>RW</th>
+                            <th>Nama Ketua Tim</th>
+                            <th>No Hp Ketua Tim</th>
+                            <th>Foto Ktp Ketua Tim</th>
+                            <th>Tanggal Pendaftaran</th>
+                            <th>Jenis Tim</th>
+                    </thead>
+                    <tbody id="table">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function validasiForm() {
+            var nama = document.getElementById('namatim').value;
+            var nomorHp = document.getElementById('nohp').value;
+            var foto = document.getElementById('foto').files[0]; 
+
+            if (nama == "" || !/^[a-zA-Z\s]+$/.test(nama)) {
+                alert("Nama Nama Hanya Boleh Berisi Huruf Tidak Boleh Ada Angka.");
+                return false;
+            }
+
+            if (nomorHp.length > 11) {
+                alert("Nomor HP Maksimal 11 Karakter.");
+                return false;
+            }
+
+            if (!/^\d+$/.test(nomorHp)) {
+                alert("Nomor HP Hanya Boleh Berisi Angka.");
+                return false;
+            }
+
+            if (foto && foto.size > 2 * 1024 * 1024) {
+                alert("Ukuran File Terlalu Besar, Maksimal 2 MB.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="save.js"></script>
+    <script src="remove.js"></script>
+    <script src="find.js"></script>
+    <script src="show_all_data.js"></script>
+    <script>
+        ShowALLData()
+    </script>
+    <script>
+        function clearData() {
+            document.getElementById('form').reset()
+        }
+        document.getElementById('id').value = ""
+    </script>
+    
+    </form>
+</body>
+</html>
